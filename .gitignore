@@ -1,0 +1,21 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Maven build files
+target/
+**/target/
+
+# Compiled Java files
+*.class
+
+# Packet captures
+*.pcap
+*.pcapng
+
+# Generated packet analyzer output
+output.pcap
+
+# OS files
+.DS_Store
+Thumbs.db

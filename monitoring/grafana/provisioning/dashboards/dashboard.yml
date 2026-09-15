@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: Packet Analyzer
+    orgId: 1
+    folder: Packet Analyzer
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /var/lib/grafana/dashboards

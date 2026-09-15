@@ -1,0 +1,21 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "panels": [
+    {"type":"stat","title":"Total Packets","gridPos":{"h":4,"w":6,"x":0,"y":0},"targets":[{"expr":"packet_analyzer_packets","refId":"A"}]},
+    {"type":"stat","title":"Total Bytes","gridPos":{"h":4,"w":6,"x":6,"y":0},"targets":[{"expr":"packet_analyzer_bytes","refId":"A"}]},
+    {"type":"stat","title":"TCP Packets","gridPos":{"h":4,"w":6,"x":12,"y":0},"targets":[{"expr":"packet_analyzer_tcp_packets","refId":"A"}]},
+    {"type":"stat","title":"UDP Packets","gridPos":{"h":4,"w":6,"x":18,"y":0},"targets":[{"expr":"packet_analyzer_udp_packets","refId":"A"}]},
+    {"type":"stat","title":"Forwarded","gridPos":{"h":4,"w":6,"x":0,"y":4},"targets":[{"expr":"packet_analyzer_forwarded_packets","refId":"A"}]},
+    {"type":"stat","title":"Dropped","gridPos":{"h":4,"w":6,"x":6,"y":4},"targets":[{"expr":"packet_analyzer_dropped_packets","refId":"A"}]},
+    {"type":"timeseries","title":"Load Balancer Dispatch","gridPos":{"h":8,"w":12,"x":12,"y":4},"targets":[{"expr":"packet_analyzer_lb_dispatched","legendFormat":"LB {{load_balancer}}","refId":"A"}]},
+    {"type":"timeseries","title":"Fast Path Processing","gridPos":{"h":8,"w":12,"x":0,"y":8},"targets":[{"expr":"packet_analyzer_fp_processed","legendFormat":"FP {{fast_path}}","refId":"A"}]}
+  ],
+  "schemaVersion": 39,
+  "style": "dark",
+  "tags": ["packet-analyzer"],
+  "templating": {"list": []},
+  "time": {"from":"now-15m","to":"now"},
+  "title": "Packet Analyzer Monitoring",
+  "version": 1
+}
