@@ -1,14 +1,57 @@
-# Packet_analyzer - Java conversion
+# Packet Inspector — Multi-Threaded Network Packet Analyzer
 
-This is a Java 17 conversion of the original C++ Packet_analyzer/DPI Engine. The processing flow and rules are kept the same: PCAP read -> Ethernet/IPv4/TCP/UDP parsing -> five-tuple -> SNI/HTTP/DNS classification -> blocking -> PCAP output -> report. The multi-threaded version keeps Reader -> LB -> FP -> Output architecture.
+Packet Inspector is a Java-based network packet analysis system that reads packets from PCAP files, parses network protocols, identifies application-level information, and processes packets through a multi-threaded forwarding pipeline.
 
-## Build
-`mvn package`
+The project demonstrates practical concepts in **Computer Networking, Java Multithreading, Packet Parsing, Concurrent Processing, and System Observability**.
 
-## Multi-threaded run
-`java -cp target/classes packet_analyzer.Main input.pcap output.pcap --block-app YouTube --block-ip 192.168.1.50 --block-domain facebook --lbs 2 --fps 2`
+## 🚀 Features
 
-## Simple run
-`java -cp target/classes packet_analyzer.MainSimple input.pcap output.pcap --block-app YouTube`
+- Reads and processes packets from PCAP files
+- Parses network packet headers and protocol information
+- Supports TCP and UDP traffic analysis
+- Identifies application-level protocols and domains/SNI where available
+- Uses multiple worker threads for concurrent packet processing
+- Implements load-balancer based packet distribution
+- Uses fast-path workers for packet processing
+- Tracks forwarded and dropped packets
+- Generates an output PCAP file
+- Provides processing statistics after execution
+- Includes optional Prometheus and Grafana monitoring
+- Runs Prometheus and Grafana using Docker Compose
 
-No external runtime library is required; PCAP parsing is implemented directly, matching the original project rather than replacing it with a packet-capture library.
+---
+
+## 🏗️ Architecture
+
+```text
+                    PCAP File
+                       │
+                       ▼
+                ┌──────────────┐
+                │ Packet Reader│
+                └──────┬───────┘
+                       │
+                       ▼
+                ┌──────────────┐
+                │ Packet Parser│
+                └──────┬───────┘
+                       │
+                       ▼
+             ┌────────────────────┐
+             │ Load Balancers     │
+             │ LB0 / LB1          │
+             └─────────┬──────────┘
+                       │
+             ┌─────────┴─────────┐
+             ▼                   ▼
+       ┌────────────┐      ┌────────────┐
+       │ Fast Path  │      │ Fast Path  │
+       │ Workers    │ ...  │ Workers    │
+       └──────┬─────┘      └──────┬─────┘
+              │                   │
+              └─────────┬─────────┘
+                        ▼
+                 Packet Processing
+                        │
+                        ▼
+                  Output PCAP
