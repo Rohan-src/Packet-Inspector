@@ -1,57 +1,83 @@
 # Packet Inspector — Multi-Threaded Network Packet Analyzer
 
-Packet Inspector is a Java-based network packet analysis system that reads packets from PCAP files, parses network protocols, identifies application-level information, and processes packets through a multi-threaded forwarding pipeline.
+A Java-based multi-threaded network packet analyzer that reads PCAP files, processes network packets, and generates useful packet statistics.
 
-The project demonstrates practical concepts in **Computer Networking, Java Multithreading, Packet Parsing, Concurrent Processing, and System Observability**.
+🚀 Features
 
-## 🚀 Features
+📂 Read and process PCAP files
 
-- Reads and processes packets from PCAP files
-- Parses network packet headers and protocol information
-- Supports TCP and UDP traffic analysis
-- Identifies application-level protocols and domains/SNI where available
-- Uses multiple worker threads for concurrent packet processing
-- Implements load-balancer based packet distribution
-- Uses fast-path workers for packet processing
-- Tracks forwarded and dropped packets
-- Generates an output PCAP file
-- Provides processing statistics after execution
-- Includes optional Prometheus and Grafana monitoring
-- Runs Prometheus and Grafana using Docker Compose
+🔍 Analyze network packets
 
----
+🌐 Support for TCP and UDP traffic
 
-## 🏗️ Architecture
+🧵 Multi-threaded packet processing
 
-```text
-                    PCAP File
-                       │
-                       ▼
-                ┌──────────────┐
-                │ Packet Reader│
-                └──────┬───────┘
-                       │
-                       ▼
-                ┌──────────────┐
-                │ Packet Parser│
-                └──────┬───────┘
-                       │
-                       ▼
-             ┌────────────────────┐
-             │ Load Balancers     │
-             │ LB0 / LB1          │
-             └─────────┬──────────┘
-                       │
-             ┌─────────┴─────────┐
-             ▼                   ▼
-       ┌────────────┐      ┌────────────┐
-       │ Fast Path  │      │ Fast Path  │
-       │ Workers    │ ...  │ Workers    │
-       └──────┬─────┘      └──────┬─────┘
-              │                   │
-              └─────────┬─────────┘
-                        ▼
-                 Packet Processing
-                        │
-                        ▼
-                  Output PCAP
+⚖️ Load balancing between workers
+
+📊 Packet processing statistics
+
+📤 Generate output PCAP files
+
+📈 Monitoring with Prometheus and Grafana
+
+🛠️ Technologies
+
+Java 17
+
+Maven
+
+PCAP
+
+Multithreading
+
+Prometheus
+
+Grafana
+
+Docker
+
+🔄 How It Works
+PCAP File
+    ↓
+Packet Reader
+    ↓
+Packet Parser
+    ↓
+Load Balancer
+    ↓
+Multiple Workers
+    ↓
+Packet Processing
+    ↓
+Output PCAP + Statistics
+
+▶️ Run
+Clone the repository
+git clone https://github.com/Rohan-src/Packet-Inspector.git
+cd Packet-Inspector
+
+Build
+mvn clean package
+
+Run
+
+Run the generated JAR from the target directory:
+
+java -jar target/<jar-name>.jar
+
+📁 Project Structure
+Packet-Inspector/
+├── src/
+│   └── main/
+│       └── java/
+│           └── packet_analyzer/
+├── monitoring/
+├── pom.xml
+└── README.md
+
+🎯 Purpose
+
+This project demonstrates how network packets can be analyzed and processed efficiently using Java multithreading and load balancing.
+
+⚠️ Only analyze network traffic that you own or have permission to inspect.
+
